@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 import { fetchMovieReviews } from '../../services/movies-api';
 import s from './MovieReviews.module.css';
 
-export default function MovieReviews({ movieId }) {
+export default function MovieReviews({ id }) {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetchMovieReviews(movieId).then(request => setReviews(request.results));
-  }, [movieId]);
+    fetchMovieReviews(id).then(data => setReviews(data.results));
+  }, [id]);
 
   return (
     <div className={s.wrapper}>
@@ -31,5 +31,5 @@ export default function MovieReviews({ movieId }) {
 }
 
 MovieReviews.propTypes = {
-  movieId: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };

@@ -26,10 +26,13 @@ function MovieCard({ movie }) {
           <p className={s.text}>{movie.overview}</p>
 
           <p className={s.category}>Genres:</p>
-
-          {/* {movie.genres.map((item, index) => (
-            <li key={index}>{item.name}</li>
-          ))} */}
+          {movie.genres && (
+            <ul>
+              {movie.genres.map((item, index) => (
+                <li key={index}>{item.name}</li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
       <div className={s.nav}>

@@ -6,23 +6,23 @@ import 'react-toastify/dist/ReactToastify.css';
 import s from './Searchbar.module.css';
 
 function Searchbar({ onSubmit }) {
-  const [filmName, setFilmName] = useState('');
+  const [movieName, setMovieName] = useState('');
 
   const handleChange = e => {
-    setFilmName(e.currentTarget.value.toLowerCase());
+    setMovieName(e.target.value.toLowerCase());
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (filmName.trim() === '') {
+    if (movieName.trim() === '') {
       toast('Please enter search query');
       return;
     }
 
-    onSubmit(filmName);
+    onSubmit(movieName);
 
-    setFilmName('');
+    setMovieName('');
   };
 
   return (
@@ -33,7 +33,7 @@ function Searchbar({ onSubmit }) {
         </button>
 
         <input
-          value={filmName}
+          value={movieName}
           onChange={handleChange}
           className={s.SearchFormInput}
           type="text"

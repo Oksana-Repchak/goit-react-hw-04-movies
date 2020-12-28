@@ -6,26 +6,26 @@ import MovieCast from '../components/MovieCast';
 import MovieReviews from '../components/MovieReviews';
 
 export default function MovieDetailsPageView() {
-  const { url, path } = useRouteMatch();
+  const { path } = useRouteMatch();
   const { movieId } = useParams();
-  const [movie, setMovie] = useState({});
+  const [movies, setMovies] = useState({});
 
   useEffect(() => {
     fetchMovieDetails(movieId).then(data => {
-      console.log(data);
-
-      setMovie(data);
+      setMovies(data);
     });
   }, [movieId]);
 
   return (
     <>
-      {movie && <MovieCard movie={movie} />}
+      {movies && <MovieCard movie={movies} />}
 
-      <Route path={`${url}/cast`}>{movie && <MovieCast id={movieId} />}</Route>
+      <Route path={`${path}:movieId/cast`}>
+        {movies && <MovieCast id={movieId} />}
+      </Route>
 
-      <Route path={`${url}/reviews`}>
-        {movie && <MovieReviews movieId={movieId} />}
+      <Route path={`${path}:movieId/reviews`}>
+        {movies && <MovieReviews id={movieId} />}
       </Route>
     </>
   );

@@ -1,20 +1,45 @@
-import { useState } from 'react';
-import Searchbar from '../components/Searchbar/Searchbar';
+import { useState, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import { fetchMoviesByName } from '../services/movies-api';
+import Searchbar from '../components/Searchbar';
+import MovieList from '../components/MovieList';
+import Loader from '../components/Loader';
 
-export default function MoviesPageView() {
-  const [filmName, setFilmName] = useState('');
-  const [films, setFilms] = useState([]);
-  const [error, setError] = useState(null);
+export default function SearchMovies() {
+  const [movies, setMovies] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
-  function onChangeQuery(filmName) {
-    setFilmName(filmName);
-    setFilms([]);
-    setError(null);
-  }
+  const history = useHistory();
+  const location = useLocation();
+
+  const searchQuery = new URLSearchParams(location.search).get('query');
+
+  const onChangeQuery = queryString => {
+    history.push({ ...location, search: `query=${queryString}` });
+  };
+
+  useEffect(() => {
+    if (searchQuery === '') {
+      return;
+    }
+    setIsLoading(true);
+    fetchMoviesByName(searchQuery).then(data => {
+      setMovies(data.results);
+      setIsLoading(false);
+    });
+  }, [searchQuery]);
+
   return (
     <>
-      {error && <p>Whoops, something went wrong: {error.message}</p>}
-      <Searchbar onSubmit={onChangeQuery} />{' '}
+      <Searchbar onSubmit={onChangeQuery} />
+
+      {searchQuery && (
+        <MovieList
+          movies={movies}
+          title={`Search results for ${searchQuery}`}
+        />
+      )}
+      {isLoading && <Loader />}
     </>
   );
 }
