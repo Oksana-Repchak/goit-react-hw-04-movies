@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useParams, useRouteMatch, Route } from 'react-router-dom';
+import { useParams, useRouteMatch, useLocation, Route } from 'react-router-dom';
 import { fetchMovieDetails } from '../services/movies-api';
 import MovieCard from '../components/MovieCard';
 import MovieCast from '../components/MovieCast';
 import MovieReviews from '../components/MovieReviews';
+import Button from '../components/Button';
 
 export default function MovieDetailsPageView() {
   const { path } = useRouteMatch();
   const { movieId } = useParams();
   const [movies, setMovies] = useState({});
+  const location = useLocation();
 
   useEffect(() => {
     fetchMovieDetails(movieId).then(data => {
@@ -18,6 +20,8 @@ export default function MovieDetailsPageView() {
 
   return (
     <>
+      <Button route={location.state} />
+
       {movies && <MovieCard movie={movies} />}
 
       <Route path={`${path}:movieId/cast`}>
