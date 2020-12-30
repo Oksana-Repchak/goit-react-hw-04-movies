@@ -6,11 +6,11 @@ import imagePlaceholder from '../../images/imagePlaceholder.png';
 
 function MovieList({ movies, title }) {
   const location = useLocation();
-  // const route = `${location.pathname}${location.search}`;
+
   return (
     <div className={s.wrapper}>
       <h2>{title}</h2>
-      {movies && (
+      {movies.length && (
         <ul className={s.list}>
           {movies.map(movie => {
             return (
