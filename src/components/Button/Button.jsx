@@ -12,7 +12,7 @@
 //   };
 
 //   return (
-//     <button onClick={handleGoBack} type="button" className={s.btn}>
+//     <button onClick={handleGoBack} type="button" className={s.Button}>
 //       Back
 //     </button>
 //   );
