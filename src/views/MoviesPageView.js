@@ -6,7 +6,7 @@ import MovieList from '../components/MovieList';
 import Loader from '../components/Loader';
 
 export default function SearchMovies() {
-  const [movies, setMovies] = useState({});
+  const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const history = useHistory();

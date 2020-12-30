@@ -10,7 +10,6 @@ import { fetchMovieDetails } from '../services/movies-api';
 import MovieCard from '../components/MovieCard';
 import MovieCast from '../components/MovieCast';
 import MovieReviews from '../components/MovieReviews';
-// import Button from '../components/Button';
 
 export default function MovieDetailsPageView() {
   const { path } = useRouteMatch();
@@ -32,8 +31,6 @@ export default function MovieDetailsPageView() {
 
   return (
     <>
-      {/* <Button onClick={location.state} /> */}
-
       <button onClick={handleGoBack} type="button">
         Back
       </button>

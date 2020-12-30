@@ -1,18 +1,10 @@
 import PropTypes from 'prop-types';
-import {
-  NavLink,
-  Link,
-  useRouteMatch,
-  useLocation,
-  useParams,
-  useHistory,
-} from 'react-router-dom';
+import { NavLink, useRouteMatch, useLocation } from 'react-router-dom';
 
 import s from './MovieCard.module.css';
 import imagePlaceholder from '../../images/imagePlaceholder.png';
 
 function MovieCard({ movie }) {
-  const history = useHistory();
   const location = useLocation();
   const { url } = useRouteMatch();
 
