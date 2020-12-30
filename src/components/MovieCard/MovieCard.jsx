@@ -52,7 +52,7 @@ function MovieCard({ movie }) {
             <NavLink
               to={{
                 pathname: `${url}/cast`,
-                state: location.state,
+                state: { from: location?.state?.from ?? '/' },
               }}
               className={s.link}
               activeClassName={s.activeLink}
@@ -64,7 +64,7 @@ function MovieCard({ movie }) {
             <NavLink
               to={{
                 pathname: `${url}/reviews`,
-                state: location.state,
+                state: { from: location?.state?.from ?? '/' },
               }}
               className={s.link}
               activeClassName={s.activeLink}

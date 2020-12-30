@@ -1,16 +1,23 @@
 import { useState, useEffect } from 'react';
-import { useParams, useRouteMatch, useLocation, Route } from 'react-router-dom';
+import {
+  useParams,
+  useRouteMatch,
+  useLocation,
+  useHistory,
+  Route,
+} from 'react-router-dom';
 import { fetchMovieDetails } from '../services/movies-api';
 import MovieCard from '../components/MovieCard';
 import MovieCast from '../components/MovieCast';
 import MovieReviews from '../components/MovieReviews';
-import Button from '../components/Button';
+// import Button from '../components/Button';
 
 export default function MovieDetailsPageView() {
   const { path } = useRouteMatch();
   const { movieId } = useParams();
   const [movies, setMovies] = useState({});
   const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     fetchMovieDetails(movieId).then(data => {
@@ -18,9 +25,18 @@ export default function MovieDetailsPageView() {
     });
   }, [movieId]);
 
+  const handleGoBack = () => {
+    history.push(location?.state?.from ?? '/');
+    console.log(location.state.from);
+  };
+
   return (
     <>
-      <Button route={location.state} />
+      {/* <Button onClick={location.state} /> */}
+
+      <button onClick={handleGoBack} type="button">
+        Back
+      </button>
 
       {movies && <MovieCard movie={movies} />}
 

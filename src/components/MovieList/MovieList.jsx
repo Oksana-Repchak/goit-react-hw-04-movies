@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import s from './MovieList.module.css';
 import imagePlaceholder from '../../images/imagePlaceholder.png';
 
 function MovieList({ movies, title }) {
+  const location = useLocation();
+  const route = `${location.pathname}${location.search}`;
   return (
     <div className={s.wrapper}>
       <h2>{title}</h2>
@@ -12,7 +14,12 @@ function MovieList({ movies, title }) {
         {movies.map(movie => {
           return (
             <li key={movie.id} className={s.item}>
-              <Link to={`movies/${movie.id}`} className={s.link}>
+              <Link
+                to={{
+                  pathname: `movies/${movie.id}`,
+                  state: { from: location },
+                }}
+              >
                 <img
                   className={s.image}
                   src={
